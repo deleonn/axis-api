@@ -1,20 +1,31 @@
-import { GraphQLSchema, GraphQLObjectType } from 'graphql';
+import { GraphQLSchema, GraphQLObjectType, GraphQLFieldConfig } from 'graphql';
 import { userQuery, usersQuery, createUserMutation, editUserMutation } from '../User';
-import { plansQuery } from '../Plan';
+import { plansQuery, planQuery, createPlanMutation, editPlanMutation } from '../Plan';
+
+const q: { [name: string]: GraphQLFieldConfig<{}, Request, any> } = {
+  userQuery,
+  usersQuery,
+  planQuery,
+  plansQuery,
+};
+
+const m: { [name: string]: GraphQLFieldConfig<{}, Request, any> } = {
+  createUserMutation,
+  editUserMutation,
+  createPlanMutation,
+  editPlanMutation,
+};
 
 const query = new GraphQLObjectType({
   fields: () => ({
-    userQuery,
-    usersQuery,
-    plansQuery,
+    ...q,
   }),
   name: 'query',
 });
 
-const mutation: GraphQLObjectType<any, any, any> = new GraphQLObjectType({
+const mutation: GraphQLObjectType = new GraphQLObjectType({
   fields: () => ({
-    createUserMutation,
-    editUserMutation,
+    ...m,
   }),
   name: 'mutation',
 });
