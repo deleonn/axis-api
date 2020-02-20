@@ -37,6 +37,10 @@ export const GraphQLUserType: GraphQLObjectType = new GraphQLObjectType({
       resolve: src => src.role,
       type: new GraphQLNonNull(GraphQLRolesType),
     },
+    phone: {
+      resolve: src => src.phone,
+      type: new GraphQLNonNull(GraphQLString),
+    },
   }),
   name: 'GraphQLUserType',
 });
